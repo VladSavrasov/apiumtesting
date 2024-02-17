@@ -21,9 +21,8 @@ public class SearchTests extends TestBase {
                         .shouldHave(sizeGreaterThan(0)));
     }
 
-    //    org.wikipedia.alpha:id/navigation_bar_item_small_label_view
     @Test
-    void exploreButtonExistTest() {
+    void exploreWidgetExistTest() {
         step("Type search", () -> {
             $(id("org.wikipedia.alpha:id/largeLabel")).shouldHave(text("Explore"));
         });

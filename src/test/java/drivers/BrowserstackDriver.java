@@ -1,35 +1,35 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.Config;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static tests.TestData.KEY;
-import static tests.TestData.USER;
 
 public class BrowserstackDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities caps = new MutableCapabilities();
+        Config config = ConfigFactory.create(Config.class, System.getProperties());
 
         // Set your access credentials
-        caps.setCapability("browserstack.user", USER);
-        caps.setCapability("browserstack.key", KEY);
+        caps.setCapability("browserstack.user", config.user());
+        caps.setCapability("browserstack.key", config.key());
 
         // Set URL of the application under test
-        caps.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+        caps.setCapability("app", config.app());
 
         // Specify device and os_version for testing
-        caps.setCapability("device", "Google Pixel 3");
-        caps.setCapability("os_version", "9.0");
+        caps.setCapability("device", config.device());
+        caps.setCapability("os_version", config.os());
 
         // Set other BrowserStack capabilities
         caps.setCapability("project", "First Java Project");
@@ -40,7 +40,7 @@ public class BrowserstackDriver implements WebDriverProvider {
         // and desired capabilities defined above
         try {
             return new RemoteWebDriver(
-                    new URL("https://hub.browserstack.com/wd/hub"), caps);
+                    new URL(config.url()), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
