@@ -1,8 +1,7 @@
 package config;
 
 @org.aeonbits.owner.Config.Sources({
-        "classpath:${launch}.properties",
-        "classpath:android.properties"
+        "classpath:${launch}.properties"
 })
 public interface Config extends org.aeonbits.owner.Config {
 
