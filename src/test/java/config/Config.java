@@ -5,20 +5,20 @@ package config;
 })
 public interface Config extends org.aeonbits.owner.Config {
 
-    @Key("androidAccessKey")
+    @Key("accessKey")
     String key();
 
-    @Key("androidUserName")
+    @Key("userName")
     String user();
 
-    @Key("androidUrl")
+    @Key("url")
     String url();
 
-    @Key("androidDevice")
+    @Key("device")
     String device();
-    @Key("androidOsVersion")
+    @Key("osVersion")
     String os();
 
-    @Key("androidApp")
+    @Key("app")
     String app();
 }
